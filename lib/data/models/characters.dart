@@ -1,4 +1,4 @@
-class Characters {
+class CharactersModel {
   final int charid;
   final String name;
   final String status;
@@ -6,7 +6,7 @@ class Characters {
   final String gender;
   final String image;
 
-  const Characters({
+  const CharactersModel({
     required this.charid,
     required this.name,
     required this.status,
@@ -15,8 +15,8 @@ class Characters {
     required this.image,
   });
 
-  factory Characters.formJson(Map<String, dynamic> json) {
-    return Characters(
+  factory CharactersModel.formJson(Map<String, dynamic> json) {
+    return CharactersModel(
       charid: json['id'],
       name: json['name'],
       status: json['status'],
