@@ -1,5 +1,5 @@
 class CharactersModel {
-  final int charid;
+  final int charId;
   final String name;
   final String status;
   final String species;
@@ -7,7 +7,7 @@ class CharactersModel {
   final String image;
 
   const CharactersModel({
-    required this.charid,
+    required this.charId,
     required this.name,
     required this.status,
     required this.species,
@@ -17,7 +17,7 @@ class CharactersModel {
 
   factory CharactersModel.formJson(Map<String, dynamic> json) {
     return CharactersModel(
-      charid: json['id'],
+      charId: json['id'],
       name: json['name'],
       status: json['status'],
       species: json['species'],
