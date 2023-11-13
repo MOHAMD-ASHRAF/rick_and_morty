@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/businees_logic/cubit/characters_cubit.dart';
-import 'package:rick_and_morty/data/models/characters.dart';
+import 'package:rick_and_morty/data/models/characters_model.dart';
+import 'package:rick_and_morty/data/repository/characters_repository.dart';
+import 'package:rick_and_morty/data/web_services/characters_web_services.dart';
 import 'package:rick_and_morty/presentation/widgets/character_item.dart';
 
 class CharactersScreen extends StatefulWidget {
@@ -64,20 +66,27 @@ class _CharactersScreenState extends State<CharactersScreen> {
         ),
         shrinkWrap: true,
         padding: EdgeInsets.zero,
+        itemCount: allCharacter.length,
         physics: const ClampingScrollPhysics(),
-         itemBuilder: (context, index) {
-      /// todo / not done
-      return const CharacterItem();
-    });
+        itemBuilder: (context, index) {
+          /// todo / not done
+          return CharacterItem(charactersModel: allCharacter[index],);
+        });
   }
+
+  late final CharactersRepository charactersRepository;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.yellowAccent,
-        title: const Text('Characters', style: TextStyle(color: Colors.grey),),
+    return BlocProvider(
+      create: (context) => CharactersCubit(charactersRepository),
+      child: Scaffold(
+        appBar: AppBar(backgroundColor: Colors.yellowAccent,
+          title: const Text(
+            'Characters', style: TextStyle(color: Colors.grey),),
+        ),
+        body: buildBlocWidget(),
       ),
-      body: buildBlocWidget(),
     );
   }
 }
